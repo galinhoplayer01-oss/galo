@@ -10,4 +10,6 @@ Jogo do galo (jogo da velha) para dois jogadores, feito em HTML, CSS e JavaScrip
 
 ## Como executar
 
-1. Faça o download ou clone o repositório:
+1. Faça o download ou clone o repositório:## Licença
+
+Distribuído sob a [licença MIT](LICENSE).
