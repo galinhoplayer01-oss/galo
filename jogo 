@@ -12,7 +12,7 @@
   .casa { aspect-ratio: 1; font-size: 3rem; font-weight: bold; background: #2c2c34; color: #fff; border: none; border-radius: 12px; cursor: pointer; }
   .casa.X { color: #ff6b6b; }
   .casa.O { color: #4dabf7; }
-  .casa.vitoria { background: #2f9e44; }
+  .casa.vitoria { background: #2f9e44; } 
   #reiniciar { margin-top: 20px; padding: 12px 24px; font-size: 1rem; border: none; border-radius: 8px; background: #4dabf7; color: #000; cursor: pointer; }
 </style>
 </head>
