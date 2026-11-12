@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jogo do Galo</title>
+<style>
+  body { font-family: sans-serif; background: #1b1b1f; color: #fff; text-align: center; margin: 0; padding: 20px; }
+  h1 { margin-bottom: 4px; }
+  #estado { font-size: 1.3rem; margin: 12px 0; min-height: 1.6em; }
+  #tabuleiro { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; width: min(90vw, 360px); margin: 0 auto; }
+  .casa { aspect-ratio: 1; font-size: 3rem; font-weight: bold; background: #2c2c34; color: #fff; border: none; border-radius: 12px; cursor: pointer; }
+  .casa.X { color: #ff6b6b; }
+  .casa.O { color: #4dabf7; }
+  .casa.vitoria { background: #2f9e44; }
+  #reiniciar { margin-top: 20px; padding: 12px 24px; font-size: 1rem; border: none; border-radius: 8px; background: #4dabf7; color: #000; cursor: pointer; }
+</style>
+</head>
+<body>
+  <h1>Galo 🐓</h1>
+  <div id="estado"></div>
+  <div id="tabuleiro"></div>
+  <button id="reiniciar">Novo jogo</button>
+
+<script>
+  const linhas = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+  const tabuleiroEl = document.getElementById('tabuleiro');
+  const estadoEl = document.getElementById('estado');
+  let casas, jogador, fim;
+
+  function iniciar() {
+    casas = Array(9).fill('');
+    jogador = 'X';
+    fim = false;
+    tabuleiroEl.innerHTML = '';
+    for (let i = 0; i < 9; i++) {
+      const b = document.createElement('button');
+      b.className = 'casa';
+      b.onclick = () => jogar(i);
+      tabuleiroEl.appendChild(b);
+    }
+    estadoEl.textContent = 'Vez de ' + jogador;
+  }
+
+  function jogar(i) {
+    if (fim || casas[i]) return;
+    casas[i] = jogador;
+    const b = tabuleiroEl.children[i];
+    b.textContent = jogador;
+    b.classList.add(jogador);
+
+    const linha = linhas.find(l => l.every(k => casas[k] === jogador));
+    if (linha) {
+      linha.forEach(k => tabuleiroEl.children[k].classList.add('vitoria'));
+      estadoEl.textContent = jogador + ' ganhou! 🎉';
+      fim = true;
+    } else if (casas.every(c => c)) {
+      estadoEl.textContent = 'Empate!';
+      fim = true;
+    } else {
+      jogador = jogador === 'X' ? 'O' : 'X';
+      estadoEl.textContent = 'Vez de ' + jogador;
+    }
+  }
+
+  document.getElementById('reiniciar').onclick = iniciar;
+  iniciar();
+</script>
+</body>
+</html>
